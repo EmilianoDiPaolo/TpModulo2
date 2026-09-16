@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+
+    <title>ProyectoModulo2</title>
+  </head>
+
+  <body class="bg-light">
+    <header class="bg-dark text-white py-3">
+      <div class="container">
+        <h1 class="text-center">Gestión de Inventario</h1>
+      </div>
+    </header>
+
+    <main class="container my-5">
+      <section class="card shadow p-4 mb-5">
+        <h2 class="mb-4">Agregar producto</h2>
+
+        <div class="mb-3">
+          <label for="nombreProducto" class="form-label">
+            Nombre del producto
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="nombreProducto"
+            placeholder="Ej: Coca Cola"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="categoriaProducto" class="form-label"> Categoría </label>
+          <select class="form-select" id="categoriaProducto">
+            <option value="">Seleccionar categoría</option>
+            <option value="Gaseosas">Gaseosas</option>
+            <option value="Dulces">Dulces</option>
+            <option value="Alimentos">Alimentos</option>
+            <option value="Limpieza">Limpieza</option>
+            <option value="Otros">Otros</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="precioProducto" class="form-label"> Precio </label>
+          <input
+            type="number"
+            class="form-control"
+            id="precioProducto"
+            placeholder="Ej: 2500"
+            min="0"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="stockProducto" class="form-label"> Stock inicial </label>
+          <input
+            type="number"
+            class="form-control"
+            id="stockProducto"
+            placeholder="Ej: 10"
+            min="0"
+          />
+        </div>
+
+        <button class="btn btn-primary" id="agregarProducto">
+          Agregar producto
+        </button>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="mb-3">Buscar productos</h2>
+
+        <input
+          type="text"
+          class="form-control"
+          id="buscarProducto"
+          placeholder="Buscar por nombre..."
+        />
+      </section>
+
+      <section class="mb-5">
+        <h2 class="mb-4">Productos</h2>
+
+        <div id="listadoProductos" class="row g-4"></div>
+      </section>
+
+      <section class="card shadow-sm p-4">
+        <h2>Resumen del inventario</h2>
+
+        <p class="mb-1">
+          Productos diferentes:
+          <strong id="cantidadProductos">0</strong>
+        </p>
+
+        <p class="mb-1">
+          Unidades en stock:
+          <strong id="cantidadStock">0</strong>
+        </p>
+
+        <p class="mb-0">
+          Valor total del inventario: $<strong id="valorInventario">0</strong>
+        </p>
+      </section>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+      <p class="mb-0">Sistema de Gestión de Inventario</p>
+    </footer>
+
+    <script src="./js/app.js" type="module"></script>
+  </body>
+</html>
