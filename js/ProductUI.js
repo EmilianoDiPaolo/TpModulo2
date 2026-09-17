@@ -10,20 +10,53 @@ export class ProductUi {
     this.btnAgregar = document.getElementById("agregarProducto");
     this.buscarProducto = document.getElementById("buscarProducto");
     this.listado = document.getElementById("listadoProductos");
+    this.cantidadProductos = document.getElementById("cantidadProductos");
+    this.cantidadStock = document.getElementById("cantidadStock");
+    this.valorTotal = document.getElementById("valorInventario");
 
     this.btnAgregar.addEventListener("click", () => this.handleAgregar());
+
+    this.buscarProducto.addEventListener("input", () => this.buscar());
+  }
+
+  actualizarResumen() {
+    let stockTotal = 0;
+    let valorTotal = 0;
+
+    const productos = this.manager.obtenerProductos();
+
+    productos.forEach((producto) => {
+      stockTotal = stockTotal + producto.stock;
+      valorTotal = valorTotal + producto.precio * producto.stock;
+    });
+
+    this.cantidadProductos.textContent = productos.length;
+    this.cantidadStock.textContent = stockTotal;
+    this.valorTotal.textContent = valorTotal;
+  }
+
+  buscar() {
+    const busqueda = this.buscarProducto.value;
+    const productosFiltrados = this.manager.buscarProductos(busqueda);
+
+    this.listado.innerHTML = "";
+
+    productosFiltrados.forEach((producto) => {
+      this.listado.appendChild(this.crearItemProducto(producto));
+    });
   }
 
   handleAgregar() {
     const nombre = this.nombre.value;
     const categoria = this.categoria.value;
-    const precio = this.precio.value;
-    const stock = this.stock.value;
+    const precio = Number(this.precio.value);
+    const stock = Number(this.stock.value);
 
-    if (!nombre || !categoria || precio < 0 || stock < 0) {
+    if (!nombre || !categoria || precio <= 0 || stock < 0) {
       alert("Debes rellenar todos los campos");
       return;
     }
+
     if (this.productoEditando) {
       this.manager.editar(
         this.productoEditando.id,
@@ -59,6 +92,8 @@ export class ProductUi {
     this.manager.obtenerProductos().forEach((producto) => {
       this.listado.appendChild(this.crearItemProducto(producto));
     });
+
+    this.actualizarResumen();
   }
 
   crearItemProducto(producto) {
